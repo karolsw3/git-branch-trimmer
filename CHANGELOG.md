@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.1.0 (2025-03-24)
+
+### Features
+
+* add rollup, update readme ([9f1dbc9](https://github.com/karolsw3/git-branch-trimmer/commit/9f1dbc9667286f1831b749231bd80b9c1cb06295))
+* base lib version ([24c6883](https://github.com/karolsw3/git-branch-trimmer/commit/24c6883a062eed141f133cb5358c7766a479df34))
+
+### Bug Fixes
+
+* add missing rollup typescript package ([2131ee9](https://github.com/karolsw3/git-branch-trimmer/commit/2131ee9ec16c8aaa5be5820e9ef9970aefa35929))
+* invalid package.json config ([160a70a](https://github.com/karolsw3/git-branch-trimmer/commit/160a70a797d83cef0de30a876bf310d456dcf923))
+* outdated pnpm-lock.yaml ([d4a8172](https://github.com/karolsw3/git-branch-trimmer/commit/d4a81724bcfe759d1076fb0dc74df7b796b3ae5e))
+* update pnpm lock ([9533da4](https://github.com/karolsw3/git-branch-trimmer/commit/9533da475f6e430618d04545b30d01940c50aed6))
+
+### Code Refactoring
+
+* improve the code maintability ([0dfadb9](https://github.com/karolsw3/git-branch-trimmer/commit/0dfadb920156f30f4a68670c6997192bebeb22e9))
+* use personal github token for actions ([157546d](https://github.com/karolsw3/git-branch-trimmer/commit/157546df245120adf8016b6aa4c5a9d14435c875))
+
 ## [0.2.0](https://github.com/coldrun/monorepo-typescript/compare/v0.2.0-rc.1...v0.2.0) (2025-02-24)
 
 ### Bug Fixes
