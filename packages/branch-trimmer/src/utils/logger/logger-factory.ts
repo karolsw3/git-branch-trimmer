@@ -1,5 +1,5 @@
-import { ILogger, ILoggerOptions } from './logger.interface';
 import { ConsoleLogger } from './console-logger';
+import { ILogger, ILoggerOptions } from './logger.interface';
 
 export class LoggerFactory {
   private static instance: ILogger | undefined;

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
+import { ICommandOptions } from './domain/interfaces';
 import { BranchService } from './services/branch-service';
 import { InquirerUI } from './ui/inquirer-ui';
-import { ICommandOptions } from './domain/interfaces';
 import { LoggerFactory } from './utils/logger/logger-factory';
 
 const logger = LoggerFactory.createLogger({ prefix: 'branch-trimmer' });
