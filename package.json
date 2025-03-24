@@ -7,7 +7,7 @@
   "packageManager": "pnpm@9.15.6",
   "engineStrict": true,
   "engines": {
-    "node": "^22",
+    "node": "^20",
     "pnpm": "~9.15.6"
   },
   "scripts": {

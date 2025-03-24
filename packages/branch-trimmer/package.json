@@ -1,0 +1,26 @@
+{
+  "name": "@git-branch-trimmer/branch-trimmer",
+  "version": "1.0.0",
+  "description": "CLI tool to detect and remove stale Git branches",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "branch-trimmer": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "inquirer": "^9.2.12",
+    "simple-git": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.11.19",
+    "typescript": "^5.7.3"
+  }
+} 
