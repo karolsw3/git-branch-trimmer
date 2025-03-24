@@ -1,8 +1,8 @@
 {
-  "name": "monorepo-typescript",
+  "name": "git-branch-trimmer",
   "private": true,
-  "author": "Coldrun <info@coldrun.com>",
-  "homepage": "https://github.com/coldrun/monorepo-typescript",
+  "author": "Charles Swierczek <charles@forkflow.io>",
+  "homepage": "https://github.com/karolsw3/git-branch-trimmer",
   "type": "module",
   "packageManager": "pnpm@9.15.6",
   "engineStrict": true,
@@ -57,8 +57,5 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
-  },
-  "docker": {
-    "registry": "ghcr.io/coldrun"
   }
 }
