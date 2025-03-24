@@ -25,18 +25,11 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Authenticate
-        id: auth
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ vars.CI_GITHUB_ACTIONS_APP_ID }}
-          private-key: ${{ secrets.CI_GITHUB_ACTIONS_PRIVATE_KEY }}
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ steps.auth.outputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install
         uses: ./.github/actions/node-install
@@ -48,7 +41,7 @@ jobs:
 
       - name: Publish
         env:
-          GITHUB_TOKEN: ${{ steps.auth.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ARGS="--yes "
           if [[ "${{ inputs.dry-run }}" == "true" ]]; then
