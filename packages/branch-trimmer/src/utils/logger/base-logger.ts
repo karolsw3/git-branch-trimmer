@@ -1,4 +1,4 @@
-import { ILogger, ILoggerOptions } from '../logger.interface';
+import { ILogger, ILoggerOptions } from './logger.interface';
 
 export abstract class BaseLogger implements ILogger {
   protected options: ILoggerOptions;

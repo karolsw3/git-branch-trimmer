@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 import chalk from 'chalk';
-import { BaseLogger } from './logger/base-logger';
+import { BaseLogger } from './base-logger';
 import { ILoggerOptions } from './logger.interface';
 
 export class ConsoleLogger extends BaseLogger {

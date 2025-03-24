@@ -1,5 +1,3 @@
-import { SimpleGit } from 'simple-git';
-
 export interface Branch {
   name: string;
   remote: string | null;
