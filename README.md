@@ -1,10 +1,47 @@
-# 🚀 Monorepo TypeScript Template 💙
+# Git Branch Trimmer
 
-[![Verify](https://github.com/coldrun/monorepo-typescript/actions/workflows/verify.yml/badge.svg?event=push)](https://github.com/coldrun/monorepo-typescript/actions/workflows/verify.yml)
+A CLI tool to help you detect and remove stale Git branches from your repository. This tool analyzes your Git branches and helps you identify which ones can be safely deleted.
 
-Crafted with care and loaded with best practices, this template is your ultimate toolkit for building and managing modern TypeScript monorepos. It seamlessly integrates industry standards like **[Conventional Commits](https://www.conventionalcommits.org/)**, **[Semantic Versioning](https://semver.org/)**, and **[Changelog Generation](https://www.npmjs.com/package/conventional-changelog)**, ensuring your projects stay consistent and professional.
+## Installation
 
-Enjoy effortless automation for **NPM packages** and **Docker images** publishing, so you can focus on what matters the most: **building great software**.  
-Powered by top-tier open-source tools, including [pnpm](https://pnpm.io/), [lerna-lite](https://github.com/lerna-lite/lerna-lite), [Prettier](https://prettier.io/), [ESLint](https://eslint.org/), [Commitlint](https://commitlint.js.org/), [lint-staged](https://github.com/lint-staged/lint-staged), [Husky](https://typicode.github.io/husky/), [git-town](https://www.git-town.com/), [Vite](https://vitejs.dev/), [Rollup](https://rollupjs.org/). This template guarantees a smooth developer experience with fast builds, strict code quality, and streamlined version control.
+You can install the package globally using npm:
 
-Perfect for teams and solo devs alike, it's the productivity booster your projects deserve. ✨
+```bash
+npm install -g @git-branch-trimmer/branch-trimmer
+```
+
+Or using pnpm:
+
+```bash
+pnpm add -g @git-branch-trimmer/branch-trimmer
+```
+
+## Usage
+
+Once installed, you can use the `branch-trimmer` command in any Git repository:
+
+```bash
+branch-trimmer
+```
+
+The tool will:
+1. Scan your repository for all branches
+2. Analyze which branches are stale (based on last commit date and merge status)
+3. Present you with an interactive menu to select which branches to delete
+4. Safely remove the selected branches
+
+## Features
+
+- Interactive branch selection
+- Safe branch deletion with confirmation
+- Visual feedback with colored output
+- Works with any Git repository
+
+## Requirements
+
+- Node.js 16 or higher
+- Git installed on your system
+
+## License
+
+MIT
