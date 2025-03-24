@@ -1,5 +1,5 @@
 {
-  "name": "@git-branch-trimmer/branch-trimmer",
+  "name": "git-branch-trimmer",
   "version": "1.0.0",
   "description": "CLI tool to detect and remove stale Git branches",
   "main": "dist/index.js",

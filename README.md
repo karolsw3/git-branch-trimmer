@@ -7,13 +7,13 @@ A CLI tool to help you detect and remove stale Git branches from your repository
 You can install the package globally using npm:
 
 ```bash
-npm install -g @git-branch-trimmer/branch-trimmer
+npm install -g git-branch-trimmer
 ```
 
 Or using pnpm:
 
 ```bash
-pnpm add -g @git-branch-trimmer/branch-trimmer
+pnpm add -g git-branch-trimmer
 ```
 
 ## Usage
