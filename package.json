@@ -1,0 +1,65 @@
+{
+  "name": "monorepo-typescript",
+  "private": true,
+  "author": "Coldrun <info@coldrun.com>",
+  "homepage": "https://github.com/coldrun/monorepo-typescript",
+  "type": "module",
+  "packageManager": "pnpm@9.15.6",
+  "engineStrict": true,
+  "engines": {
+    "node": "^22",
+    "pnpm": "~9.15.6"
+  },
+  "scripts": {
+    "dev": "pnpm -r --parallel run dev",
+    "build": "pnpm -r run build",
+    "build:docker": "pnpm -r --stream run build:docker",
+    "clean": "rimraf --glob packages/*/dist temp .eslintcache",
+    "clean:all": "pnpm clean && rimraf --glob node_modules packages/*/node_modules",
+    "format": "prettier . --write --ignore-unknown",
+    "lint": "eslint --cache . && prettier -c .",
+    "test": "pnpm -r --parallel run test",
+    "lerna": "lerna",
+    "ci:release": "lerna version",
+    "ci:publish": "lerna publish from-package",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "@commitlint/types": "^19.5.0",
+    "@eslint/js": "^9.20.0",
+    "@lerna-lite/cli": "^3.12.1",
+    "@lerna-lite/publish": "^3.12.1",
+    "@types/node": "^22.13.4",
+    "conventional-changelog-conventionalcommits": "^7.0.2",
+    "eslint": "^9.20.1",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-import-resolver-typescript": "^3.8.3",
+    "eslint-plugin-import-x": "^4.6.1",
+    "execa": "^9.5.2",
+    "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "just-pnpm": "^1.0.2",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.1",
+    "rimraf": "^6.0.1",
+    "typescript": "~5.7.3",
+    "typescript-eslint": "^8.5.0",
+    "yargs": "^17.7.2"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs,jsx,ts,cts,mts,tsx,vue}": [
+      "eslint --fix"
+    ],
+    "*": [
+      "prettier --write --ignore-unknown"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "docker": {
+    "registry": "ghcr.io/coldrun"
+  }
+}

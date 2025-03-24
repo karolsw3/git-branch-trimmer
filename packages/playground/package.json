@@ -1,0 +1,19 @@
+{
+  "name": "@coldrun/monorepo-typescript-playground",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "build:docker": "node ../../scripts/docker build playground",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@coldrun/monorepo-typescript-core": "workspace:*",
+    "@coldrun/monorepo-typescript-shared": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^5.4.3"
+  }
+}

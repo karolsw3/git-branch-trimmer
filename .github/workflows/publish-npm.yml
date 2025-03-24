@@ -1,0 +1,58 @@
+name: Publish NPM
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Dry-run'
+        type: boolean
+        required: false
+
+run-name: >-
+  Publish
+    ${{ github.ref_name && format('{0}', github.ref_name) || format('') }}
+    ${{ inputs.dry-run && format('[🚫 Dry-Run]') || format('') }}
+
+permissions:
+  packages: write
+
+concurrency: publish-npm
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Authenticate
+        id: auth
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.CI_GITHUB_ACTIONS_APP_ID }}
+          private-key: ${{ secrets.CI_GITHUB_ACTIONS_PRIVATE_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ steps.auth.outputs.token }}
+
+      - name: Install
+        uses: ./.github/actions/node-install
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build
+        run: pnpm build
+
+      - name: Publish
+        env:
+          GITHUB_TOKEN: ${{ steps.auth.outputs.token }}
+        run: |
+          ARGS="--yes "
+          if [[ "${{ inputs.dry-run }}" == "true" ]]; then
+            ARGS+="--dry-run "
+          fi
+          echo "$ARGS"
+          bash -c "pnpm ci:publish $ARGS"
