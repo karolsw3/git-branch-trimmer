@@ -18,8 +18,9 @@
     "simple-git": "^3.22.0"
   },
   "devDependencies": {
+    "@rollup/plugin-typescript": "12.1.2",
     "@types/inquirer": "^9.0.7",
     "@types/node": "^20.11.19",
     "typescript": "^5.3.3"
   }
-} 
+}
