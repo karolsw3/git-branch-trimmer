@@ -1,5 +1,7 @@
 # Git Branch Trimmer
 
+![Git Branch Trimmer Hero](src/public/readme-hero.png)
+
 A CLI tool to help you detect and remove stale Git branches from your repository. This tool analyzes your Git branches and helps you identify which ones can be safely deleted.
 
 ## Installation
