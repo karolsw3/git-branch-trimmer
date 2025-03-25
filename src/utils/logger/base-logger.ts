@@ -8,23 +8,23 @@ export abstract class BaseLogger implements ILogger {
       useColors: true,
       prefix: '',
       timestamp: false,
-      ...options
+      ...options,
     };
   }
 
   protected formatMessage(message: string): string {
     const parts: string[] = [];
-    
+
     if (this.options.timestamp) {
       parts.push(`[${new Date().toISOString()}]`);
     }
-    
+
     if (this.options.prefix) {
       parts.push(`[${this.options.prefix}]`);
     }
-    
+
     parts.push(message);
-    
+
     return parts.join(' ');
   }
 
@@ -33,4 +33,4 @@ export abstract class BaseLogger implements ILogger {
   abstract warn(message: string): void;
   abstract error(message: string): void;
   debug?(message: string): void;
-} 
+}

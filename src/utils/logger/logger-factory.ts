@@ -14,4 +14,4 @@ export class LoggerFactory {
   static reset(): void {
     this.instance = undefined;
   }
-} 
+}

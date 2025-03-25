@@ -14,17 +14,17 @@ export class BranchService implements IBranchService {
   async getStaleBranches(): Promise<Branch[]> {
     // Get all local branches
     const localBranches = await this.git.branchLocal();
-    
+
     // Get all remote branches
     const remoteBranches = await this.git.branch(['-r']);
-    
+
     // Create a set of remote branch names (without 'origin/' prefix)
     const remoteBranchNames = new Set(
       remoteBranches.all
-        .filter(branch => branch.startsWith('origin/'))
-        .map(branch => branch.replace('origin/', ''))
+        .filter((branch) => branch.startsWith('origin/'))
+        .map((branch) => branch.replace('origin/', '')),
     );
-    
+
     // Filter out the current branch and main/master
     const staleBranches = Object.entries(localBranches.branches)
       .filter(([name]) => {
@@ -36,9 +36,9 @@ export class BranchService implements IBranchService {
       .map(([name, info]) => ({
         name,
         remote: null,
-        lastCommit: info.commit
+        lastCommit: info.commit,
       }));
-    
+
     return staleBranches;
   }
 
@@ -57,4 +57,4 @@ export class BranchService implements IBranchService {
   async checkIsRepo(): Promise<boolean> {
     return this.git.checkIsRepo();
   }
-} 
+}

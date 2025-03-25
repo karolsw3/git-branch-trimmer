@@ -17,4 +17,4 @@ export interface IUserInterface {
 export interface ICommandOptions {
   dryRun?: boolean;
   force?: boolean;
-} 
+}

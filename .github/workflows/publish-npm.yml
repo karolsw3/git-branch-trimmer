@@ -50,26 +50,26 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-            ARGS="--yes "
-            if [[ "${{ inputs.dry-run }}" == "true" ]]; then
-              ARGS+="--dry-run "
-            fi
-            
-            MAX_RETRIES=3
-            RETRY_COUNT=0
-            
-            while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
-              if pnpm ci:publish $ARGS; then
-                echo "Published successfully"
-                break
+          ARGS="--yes "
+          if [[ "${{ inputs.dry-run }}" == "true" ]]; then
+            ARGS+="--dry-run "
+          fi
+
+          MAX_RETRIES=3
+          RETRY_COUNT=0
+
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            if pnpm ci:publish $ARGS; then
+              echo "Published successfully"
+              break
+            else
+              RETRY_COUNT=$((RETRY_COUNT+1))
+              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                echo "Publish failed, retrying in 60 seconds..."
+                sleep 60
               else
-                RETRY_COUNT=$((RETRY_COUNT+1))
-                if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
-                  echo "Publish failed, retrying in 60 seconds..."
-                  sleep 60
-                else
-                  echo "Publish failed after $MAX_RETRIES attempts"
-                  exit 1
-                fi
+                echo "Publish failed after $MAX_RETRIES attempts"
+                exit 1
               fi
-            done
+            fi
+          done

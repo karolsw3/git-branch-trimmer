@@ -2,7 +2,7 @@
   "name": "git-branch-trimmer",
   "version": "1.1.3",
   "private": false,
-  "type": "commonjs",
+  "type": "module",
   "description": "CLI tool to detect and remove stale Git branches",
   "author": "Charles Swierczek <charles@forkflow.io>",
   "homepage": "https://github.com/karolsw3/git-branch-trimmer",
@@ -23,7 +23,7 @@
     "clean": "rimraf dist temp .eslintcache",
     "clean:all": "pnpm clean && rimraf node_modules",
     "format": "prettier . --write --ignore-unknown",
-    "lint": "eslint . && prettier .",
+    "lint": "eslint . --max-warnings 0 && prettier . --check",
     "prepare": "husky"
   },
   "dependencies": {

@@ -25,6 +25,7 @@ git-branch-trimmer
 ```
 
 The tool will:
+
 1. Scan your repository for all branches
 2. Analyze which branches are stale (based on last commit date and merge status)
 3. Present you with an interactive menu to select which branches to delete

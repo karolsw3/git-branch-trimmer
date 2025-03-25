@@ -10,4 +10,4 @@ export interface ILoggerOptions {
   useColors?: boolean;
   prefix?: string;
   timestamp?: boolean;
-} 
+}
