@@ -22,7 +22,7 @@ class BranchTrimmer {
       // Check if we're in a Git repository
       const isRepo = await this.branchService.checkIsRepo();
       if (!isRepo) {
-        logger.error('Error: Not a Git repository');
+        logger.error('❌ Error: Not a Git repository');
         process.exit(1);
       }
 
@@ -48,7 +48,7 @@ class BranchTrimmer {
 
       if (options.dryRun) {
         logger.info(`\nDry run: Would delete ${selectedBranches.length} branch(es):`);
-        selectedBranches.forEach(branch => logger.info(`- ${branch}`));
+        selectedBranches.forEach((branch) => logger.info(`- ${branch}`));
         process.exit(0);
       }
 
@@ -63,7 +63,7 @@ class BranchTrimmer {
 
 async function main() {
   const program = new Command();
-  
+
   program
     .name('branch-trimmer')
     .description('CLI tool to detect and remove stale Git branches')
@@ -72,10 +72,10 @@ async function main() {
     .option('-f, --force', 'Skip confirmation prompt');
 
   program.parse();
-  
+
   const options = program.opts() as ICommandOptions;
   const trimmer = new BranchTrimmer();
   await trimmer.run(options);
 }
 
-main(); 
+main();
