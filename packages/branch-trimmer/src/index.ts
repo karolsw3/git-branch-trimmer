@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { Command } from 'commander';
 import { ICommandOptions } from './domain/interfaces';
 import { BranchService } from './services/branch-service';
