@@ -1,5 +1,5 @@
+import { simpleGit, SimpleGit, BranchSummary } from 'simple-git';
 import { BranchService } from '../branch-service';
-import { simpleGit } from 'simple-git';
 
 // Mock simple-git
 jest.mock('simple-git', () => ({
@@ -8,7 +8,7 @@ jest.mock('simple-git', () => ({
 
 describe('BranchService', () => {
   let branchService: BranchService;
-  let mockGit: any;
+  let mockGit: jest.Mocked<SimpleGit>;
 
   beforeEach(() => {
     // Reset all mocks before each test
@@ -19,7 +19,7 @@ describe('BranchService', () => {
       branchLocal: jest.fn(),
       branch: jest.fn(),
       checkIsRepo: jest.fn(),
-    };
+    } as unknown as jest.Mocked<SimpleGit>;
 
     // Setup the mock implementation
     (simpleGit as jest.Mock).mockReturnValue(mockGit);
@@ -43,13 +43,23 @@ describe('BranchService', () => {
 
   describe('getStaleBranches', () => {
     it('should return empty array when no stale branches found', async () => {
-      mockGit.branchLocal.mockResolvedValue({
+      const mockBranchSummary: BranchSummary = {
         current: 'main',
+        detached: false,
+        all: ['main'],
         branches: {
-          main: { commit: 'abc123' },
+          main: {
+            current: true,
+            name: 'main',
+            commit: 'abc123',
+            label: 'main',
+            linkedWorkTree: false,
+          },
         },
-      });
+      };
+      mockGit.branchLocal.mockResolvedValue(mockBranchSummary);
       mockGit.branch.mockResolvedValue({
+        ...mockBranchSummary,
         all: ['origin/main'],
       });
 
@@ -58,15 +68,37 @@ describe('BranchService', () => {
     });
 
     it('should identify stale branches correctly', async () => {
-      mockGit.branchLocal.mockResolvedValue({
+      const mockBranchSummary: BranchSummary = {
         current: 'main',
+        detached: false,
+        all: ['main', 'feature/old', 'feature/new'],
         branches: {
-          main: { commit: 'abc123' },
-          'feature/old': { commit: 'def456' },
-          'feature/new': { commit: 'ghi789' },
+          main: {
+            current: true,
+            name: 'main',
+            commit: 'abc123',
+            label: 'main',
+            linkedWorkTree: false,
+          },
+          'feature/old': {
+            current: false,
+            name: 'feature/old',
+            commit: 'def456',
+            label: 'feature/old',
+            linkedWorkTree: false,
+          },
+          'feature/new': {
+            current: false,
+            name: 'feature/new',
+            commit: 'ghi789',
+            label: 'feature/new',
+            linkedWorkTree: false,
+          },
         },
-      });
+      };
+      mockGit.branchLocal.mockResolvedValue(mockBranchSummary);
       mockGit.branch.mockResolvedValue({
+        ...mockBranchSummary,
         all: ['origin/main', 'origin/feature/new'],
       });
 
@@ -84,7 +116,13 @@ describe('BranchService', () => {
   describe('deleteBranches', () => {
     it('should delete branches successfully', async () => {
       const branches = ['feature/old', 'feature/stale'];
-      mockGit.branch.mockResolvedValue(undefined);
+      const mockBranchSummary: BranchSummary = {
+        current: 'main',
+        detached: false,
+        all: ['main'],
+        branches: {},
+      };
+      mockGit.branch.mockResolvedValue(mockBranchSummary);
 
       await branchService.deleteBranches(branches);
       expect(mockGit.branch).toHaveBeenCalledTimes(2);
@@ -96,7 +134,9 @@ describe('BranchService', () => {
       const branches = ['feature/old'];
       mockGit.branch.mockRejectedValue(new Error('Failed to delete branch'));
 
-      await expect(branchService.deleteBranches(branches)).rejects.toThrow('Failed to delete branch');
+      await expect(branchService.deleteBranches(branches)).rejects.toThrow(
+        'Failed to delete branch',
+      );
     });
   });
-}); 
+});

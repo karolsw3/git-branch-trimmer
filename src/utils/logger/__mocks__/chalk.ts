@@ -6,4 +6,4 @@ const chalk = {
   gray: (text: string) => text,
 };
 
-export default chalk; 
+export default chalk;

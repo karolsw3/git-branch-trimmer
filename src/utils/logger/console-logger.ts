@@ -6,7 +6,7 @@ const initChalk = async () => {
   try {
     const chalkModule = await import('chalk');
     chalk = chalkModule.default;
-  } catch (error) {
+  } catch {
     // In test environment, use a simple mock
     chalk = {
       blue: (text: string) => text,

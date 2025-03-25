@@ -1,5 +1,6 @@
-import { InquirerUI } from '../inquirer-ui';
+import inquirer from 'inquirer';
 import { Branch } from '../../domain/interfaces';
+import { InquirerUI } from '../inquirer-ui';
 
 // Mock inquirer
 jest.mock('inquirer', () => ({
@@ -18,7 +19,7 @@ describe('InquirerUI', () => {
     jest.clearAllMocks();
 
     // Get the mocked prompt function
-    mockPrompt = jest.requireMock('inquirer').default.prompt;
+    mockPrompt = inquirer.prompt as unknown as jest.Mock;
     ui = new InquirerUI();
   });
 
@@ -101,4 +102,4 @@ describe('InquirerUI', () => {
       ]);
     });
   });
-}); 
+});

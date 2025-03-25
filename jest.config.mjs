@@ -15,7 +15,5 @@ export default {
       },
     ],
   },
-  transformIgnorePatterns: [
-    'node_modules/(?!(chalk|#ansi-styles)/)',
-  ],
-}; 
+  transformIgnorePatterns: ['node_modules/(?!(chalk|#ansi-styles)/)'],
+};
