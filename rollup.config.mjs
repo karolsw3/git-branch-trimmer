@@ -7,7 +7,7 @@ export default {
   input: 'src/index.ts',
   output: {
     dir: 'dist',
-    format: 'cjs',
+    format: 'esm',
     sourcemap: true,
     exports: 'auto',
     preserveModules: false,
@@ -31,6 +31,8 @@ export default {
       declaration: true,
       declarationDir: 'dist',
       sourceMap: true,
+      // Ensure TypeScript outputs ESM
+      module: 'ESNext',
     }),
   ],
   external: [
