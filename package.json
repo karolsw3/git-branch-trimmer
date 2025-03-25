@@ -9,7 +9,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "branch-trimmer": "./dist/index.js"
+    "git-branch-trimmer": "./dist/index.js"
   },
   "packageManager": "pnpm@9.15.6",
   "engineStrict": true,

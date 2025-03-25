@@ -18,10 +18,10 @@ pnpm add -g git-branch-trimmer
 
 ## Usage
 
-Once installed, you can use the `branch-trimmer` command in any Git repository:
+Once installed, you can use the `git-branch-trimmer` command in any Git repository:
 
 ```bash
-branch-trimmer
+git-branch-trimmer
 ```
 
 The tool will:
