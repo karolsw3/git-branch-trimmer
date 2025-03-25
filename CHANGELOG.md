@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/karolsw3/git-branch-trimmer/compare/v1.1.0...v1.1.1) (2025-03-25)
+
+### Bug Fixes
+
+* refactor the publishing script ([ebfe14e](https://github.com/karolsw3/git-branch-trimmer/commit/ebfe14e5c4c44cdd9c2ae186131871a0745fed3b))
+
 ## 1.1.0 (2025-03-24)
 
 ### Features
