@@ -1,5 +1,5 @@
 {
-  "name": "@karolsw3/git-branch-trimmer",
+  "name": "git-branch-trimmer",
   "version": "1.3.1",
   "private": false,
   "type": "module",
@@ -67,8 +67,5 @@
     "*": [
       "prettier --write --ignore-unknown"
     ]
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   }
 }
