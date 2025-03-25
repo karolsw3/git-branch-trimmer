@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.3](https://github.com/karolsw3/git-branch-trimmer/compare/v1.1.2...v1.1.3) (2025-03-25)
+
+### Bug Fixes
+
+* chalk configuration ([9fee5e5](https://github.com/karolsw3/git-branch-trimmer/commit/9fee5e599db10b416b47c8b034041d3e0d560433))
+
 ## [1.1.2](https://github.com/karolsw3/git-branch-trimmer/compare/v1.1.1...v1.1.2) (2025-03-25)
 
 ### Bug Fixes
