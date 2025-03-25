@@ -6,6 +6,10 @@
   "description": "CLI tool to detect and remove stale Git branches",
   "author": "Charles Swierczek <charles@forkflow.io>",
   "homepage": "https://github.com/karolsw3/git-branch-trimmer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karolsw3/git-branch-trimmer.git"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
