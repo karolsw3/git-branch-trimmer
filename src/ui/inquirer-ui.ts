@@ -5,7 +5,7 @@ const logger = LoggerFactory.createLogger({ prefix: 'ui' });
 
 export class InquirerUI implements IUserInterface {
   async selectBranches(branches: Branch[]): Promise<string[]> {
-    const inquirer = (await import('inquirer')).default;
+    const { default: inquirer } = await import('inquirer');
 
     logger.warn(`\nFound ${branches.length} stale branches:`);
     branches.forEach((branch, index) => {
@@ -28,7 +28,7 @@ export class InquirerUI implements IUserInterface {
   }
 
   async confirmDeletion(count: number): Promise<boolean> {
-    const inquirer = (await import('inquirer')).default;
+    const { default: inquirer } = await import('inquirer');
 
     const { confirm } = await inquirer.prompt([
       {

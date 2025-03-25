@@ -3,9 +3,19 @@ import { ChalkInstance } from 'chalk';
 
 let chalk: ChalkInstance;
 const initChalk = async () => {
-  const chalkModule = await import('chalk');
-  chalk = chalkModule.default;
-  // Continue with your code after chalk is loaded
+  try {
+    const chalkModule = await import('chalk');
+    chalk = chalkModule.default;
+  } catch (error) {
+    // In test environment, use a simple mock
+    chalk = {
+      blue: (text: string) => text,
+      green: (text: string) => text,
+      yellow: (text: string) => text,
+      red: (text: string) => text,
+      gray: (text: string) => text,
+    } as ChalkInstance;
+  }
   return chalk;
 };
 
