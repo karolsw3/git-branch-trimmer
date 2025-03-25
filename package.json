@@ -28,7 +28,8 @@
     "clean:all": "pnpm clean && rimraf node_modules",
     "format": "prettier . --write --ignore-unknown",
     "lint": "eslint . --max-warnings 0 && prettier . --check",
-    "prepare": "husky"
+    "prepare": "husky",
+    "publish": "source .env && pnpm publish"
   },
   "dependencies": {
     "@rollup/plugin-commonjs": "28.0.3",
