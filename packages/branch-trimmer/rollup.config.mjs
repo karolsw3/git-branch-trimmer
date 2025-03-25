@@ -1,13 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const commonjs = require('@rollup/plugin-commonjs');
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const json = require('@rollup/plugin-json');
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const resolve = require('@rollup/plugin-node-resolve');
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const typescript = require('@rollup/plugin-typescript');
+import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
+import resolve from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
 
-module.exports = {
+export default {
   input: 'src/index.ts',
   output: {
     dir: 'dist',
@@ -20,8 +16,15 @@ module.exports = {
   plugins: [
     resolve({
       preferBuiltins: true,
+      // Important for ESM resolution
+      exportConditions: ['node', 'import', 'default'],
     }),
-    commonjs(),
+    commonjs({
+      // Better handling of mixed module types
+      transformMixedEsModules: true,
+      // Required for chalk 5.x
+      esmExternals: true,
+    }),
     json(),
     typescript({
       tsconfig: './tsconfig.json',

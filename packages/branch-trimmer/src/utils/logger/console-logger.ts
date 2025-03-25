@@ -1,10 +1,22 @@
 /* eslint-disable no-console */
-import chalk from 'chalk';
+import { ChalkInstance } from 'chalk';
+
+let chalk: ChalkInstance;
+const initChalk = async () => {
+  const chalkModule = await import('chalk');
+  chalk = chalkModule.default;
+  // Continue with your code after chalk is loaded
+  return chalk;
+};
+
 import { BaseLogger } from './base-logger';
 import { ILoggerOptions } from './logger.interface';
 
 export class ConsoleLogger extends BaseLogger {
   constructor(options: ILoggerOptions = {}) {
+    initChalk().then((chalkInstance) => {
+      chalk = chalkInstance;
+    });
     super(options);
   }
 
@@ -52,4 +64,4 @@ export class ConsoleLogger extends BaseLogger {
       console.debug(formattedMessage);
     }
   }
-} 
+}
