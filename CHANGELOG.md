@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/karolsw3/git-branch-trimmer/compare/v1.1.1...v1.1.2) (2025-03-25)
+
+### Bug Fixes
+
+* invalid rollup config ([3c504fc](https://github.com/karolsw3/git-branch-trimmer/commit/3c504fc39e40b7794d2a106e83a8c4e5d853aa23))
+
 ## [1.1.1](https://github.com/karolsw3/git-branch-trimmer/compare/v1.1.0...v1.1.1) (2025-03-25)
 
 ### Bug Fixes
