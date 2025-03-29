@@ -14,7 +14,7 @@ export class BranchService implements IBranchService {
 
   async getStaleBranches(options?: { staleThreshold?: number }): Promise<Branch[]> {
     const staleThresholdDays = options?.staleThreshold || DEFAULT_STALE_THRESHOLD_DAYS;
-    
+
     // Get all local branches
     const localBranches = await this.git.branchLocal();
 
@@ -33,28 +33,28 @@ export class BranchService implements IBranchService {
     // Calculate the cutoff date for stale branches
     const cutoffDate = new Date();
     cutoffDate.setDate(cutoffDate.getDate() - staleThresholdDays);
-    
+
     // Get all stale branches
     const staleBranches: Branch[] = [];
-    
+
     // Filter out the current branch and main/master
     for (const [name, info] of Object.entries(localBranches.branches)) {
       const isCurrent = name === localBranches.current;
       const isMain = name === 'main' || name === 'master';
-      
+
       if (!isCurrent && !isMain) {
         // Get last commit date
         const lastCommitDetails = await this.git.show([
           '-s',
           '--format=%cd',
           '--date=iso',
-          info.commit
+          info.commit,
         ]);
-        
+
         const lastCommitDate = new Date(lastCommitDetails.trim());
         const hasRemote = remoteBranchMap.has(name);
         const remote = hasRemote ? remoteBranchMap.get(name) || null : null;
-        
+
         // Check if branch is stale:
         // 1. No remote counterpart, or
         // 2. Has remote but last commit is older than threshold
@@ -63,7 +63,7 @@ export class BranchService implements IBranchService {
             name,
             remote,
             lastCommit: info.commit,
-            lastCommitDate
+            lastCommitDate,
           });
         }
       }
@@ -71,7 +71,7 @@ export class BranchService implements IBranchService {
 
     // Sort branches by last commit date (oldest first)
     staleBranches.sort((a, b) => a.lastCommitDate.getTime() - b.lastCommitDate.getTime());
-    
+
     return staleBranches;
   }
 

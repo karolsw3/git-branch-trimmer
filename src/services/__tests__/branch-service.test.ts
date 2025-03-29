@@ -112,18 +112,18 @@ describe('BranchService', () => {
         ...mockBranchSummary,
         all: ['origin/main', 'origin/feature/new'],
       });
-      
+
       // Mock commit dates
       mockGit.show.mockResolvedValue('2023-01-10T12:00:00');
 
       const result = await branchService.getStaleBranches();
-      
+
       // Assert we got one result
       expect(result).toHaveLength(1);
-      
+
       // All our tests use expect.assertions to ensure the assertions are actually run
       expect.assertions(5);
-      
+
       // Instead of checking length, we'll just trust our expectation above
       // and use non-null assertion
       expect(result[0]!.name).toBe('feature/old');
@@ -166,26 +166,17 @@ describe('BranchService', () => {
         ...mockBranchSummary,
         all: ['origin/main', 'origin/feature/recent', 'origin/feature/old-with-remote'],
       });
-      
-      // Mock show implementation for commit dates with simpler approach
-      mockGit.show.mockImplementation((args: any) => {
-        if (args && Array.isArray(args) && args.length > 3) {
-          const commitHash = args[3];
-          if (commitHash === 'def456') {
-            return Promise.resolve('2023-01-05T12:00:00') as any; // 10 days old
-          }
-          if (commitHash === 'ghi789') {
-            return Promise.resolve('2022-11-16T12:00:00') as any; // 60 days old
-          }
-        }
-        return Promise.resolve('2023-01-14T12:00:00') as any; // 1 day old
-      });
+
+      // Simple way to mock the show method for this test
+      mockGit.show
+        .mockResolvedValueOnce('2023-01-05T12:00:00') // For def456
+        .mockResolvedValueOnce('2022-11-16T12:00:00'); // For ghi789
 
       const result = await branchService.getStaleBranches({ staleThreshold: 30 });
-      
+
       expect(result).toHaveLength(1);
       expect.assertions(4);
-      
+
       expect(result[0]!.name).toBe('feature/old-with-remote');
       expect(result[0]!.remote).toBe('origin/feature/old-with-remote');
       expect(result[0]!.lastCommitDate).toEqual(new Date('2022-11-16T12:00:00'));
@@ -225,27 +216,18 @@ describe('BranchService', () => {
         ...mockBranchSummary,
         all: ['origin/main', 'origin/feature/7-days-old', 'origin/feature/15-days-old'],
       });
-      
-      // Mock show implementation for commit dates with simpler approach
-      mockGit.show.mockImplementation((args: any) => {
-        if (args && Array.isArray(args) && args.length > 3) {
-          const commitHash = args[3];
-          if (commitHash === 'def456') {
-            return Promise.resolve('2023-01-08T12:00:00') as any; // 7 days old
-          }
-          if (commitHash === 'ghi789') {
-            return Promise.resolve('2022-12-31T12:00:00') as any; // 15 days old
-          }
-        }
-        return Promise.resolve('2023-01-14T12:00:00') as any; // 1 day old
-      });
+
+      // Simple way to mock the show method for this test
+      mockGit.show
+        .mockResolvedValueOnce('2023-01-08T12:00:00') // For def456
+        .mockResolvedValueOnce('2022-12-31T12:00:00'); // For ghi789
 
       // Using a 10-day threshold, only the 15-day old branch should be stale
       const result = await branchService.getStaleBranches({ staleThreshold: 10 });
-      
+
       expect(result).toHaveLength(1);
       expect.assertions(2);
-      
+
       expect(result[0]!.name).toBe('feature/15-days-old');
     });
 
@@ -290,29 +272,18 @@ describe('BranchService', () => {
         ...mockBranchSummary,
         all: ['origin/main'],
       });
-      
-      // Mock show implementation for commit dates with simpler approach
-      mockGit.show.mockImplementation((args: any) => {
-        if (args && Array.isArray(args) && args.length > 3) {
-          const commitHash = args[3];
-          if (commitHash === 'def456') {
-            return Promise.resolve('2022-12-15T12:00:00') as any; // 31 days old
-          }
-          if (commitHash === 'ghi789') {
-            return Promise.resolve('2022-11-15T12:00:00') as any; // 61 days old
-          }
-          if (commitHash === 'jkl012') {
-            return Promise.resolve('2022-12-25T12:00:00') as any; // 21 days old
-          }
-        }
-        return Promise.resolve('2023-01-14T12:00:00') as any; // 1 day old
-      });
+
+      // Simple way to mock the show method for this test
+      mockGit.show
+        .mockResolvedValueOnce('2022-12-15T12:00:00') // For def456
+        .mockResolvedValueOnce('2022-11-15T12:00:00') // For ghi789
+        .mockResolvedValueOnce('2022-12-25T12:00:00'); // For jkl012
 
       const result = await branchService.getStaleBranches();
-      
+
       expect(result).toHaveLength(3);
       expect.assertions(4);
-      
+
       // Should be sorted oldest first
       expect(result[0]!.name).toBe('feature/very-old');
       expect(result[1]!.name).toBe('feature/medium-old');
@@ -323,8 +294,8 @@ describe('BranchService', () => {
   describe('deleteBranches', () => {
     it('should delete branches successfully', async () => {
       const branches = ['feature/old', 'feature/stale'];
-      mockGit.branch.mockResolvedValueOnce({} as any);
-      mockGit.branch.mockResolvedValueOnce({} as any);
+      mockGit.branch.mockResolvedValueOnce({} as BranchSummary);
+      mockGit.branch.mockResolvedValueOnce({} as BranchSummary);
 
       await branchService.deleteBranches(branches);
       expect(mockGit.branch).toHaveBeenCalledTimes(2);

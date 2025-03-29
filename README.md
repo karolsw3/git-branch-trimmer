@@ -61,11 +61,11 @@ The tool will:
 
 ## Command Line Options
 
-| Option | Description |
-|--------|-------------|
+| Option                         | Description                                                                 |
+| ------------------------------ | --------------------------------------------------------------------------- |
 | `-t, --stale-threshold <days>` | Set the threshold in days for a branch to be considered stale (default: 30) |
-| `-d, --dry-run` | Show what would be deleted without actually deleting |
-| `-f, --force` | Skip confirmation prompt |
+| `-d, --dry-run`                | Show what would be deleted without actually deleting                        |
+| `-f, --force`                  | Skip confirmation prompt                                                    |
 
 ## Requirements
 

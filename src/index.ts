@@ -25,10 +25,12 @@ class BranchTrimmer {
       }
 
       logger.info('🔍 Searching for stale branches...');
-      
+
       // Configure stale branch detection
-      const staleOptions = options.staleThreshold ? { staleThreshold: options.staleThreshold } : undefined;
-      
+      const staleOptions = options.staleThreshold
+        ? { staleThreshold: options.staleThreshold }
+        : undefined;
+
       // Get stale branches
       const staleBranches = await this.branchService.getStaleBranches(staleOptions);
 
@@ -73,7 +75,11 @@ async function main() {
     .version('1.0.0')
     .option('-d, --dry-run', 'Show what would be deleted without actually deleting')
     .option('-f, --force', 'Skip confirmation prompt')
-    .option('-t, --stale-threshold <days>', 'Set the threshold in days for a branch to be considered stale (default: 30)', parseInt);
+    .option(
+      '-t, --stale-threshold <days>',
+      'Set the threshold in days for a branch to be considered stale (default: 30)',
+      parseInt,
+    );
 
   program.parse();
 

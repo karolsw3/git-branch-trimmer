@@ -27,10 +27,15 @@ describe('InquirerUI', () => {
     it('should return selected branches', async () => {
       const date1 = new Date('2023-01-10T12:00:00');
       const date2 = new Date('2023-01-15T12:00:00');
-      
+
       const branches: Branch[] = [
         { name: 'feature/1', remote: null, lastCommit: 'abc123', lastCommitDate: date1 },
-        { name: 'feature/2', remote: 'origin/feature/2', lastCommit: 'def456', lastCommitDate: date2 },
+        {
+          name: 'feature/2',
+          remote: 'origin/feature/2',
+          lastCommit: 'def456',
+          lastCommitDate: date2,
+        },
       ];
 
       mockPrompt.mockResolvedValue({
@@ -46,13 +51,13 @@ describe('InquirerUI', () => {
           name: 'selectedBranches',
           message: 'Select branches to delete:',
           choices: expect.arrayContaining([
-            expect.objectContaining({ 
-              name: `feature/1 - Last commit: ${date1.toLocaleDateString()} (no remote)`, 
-              value: 'feature/1' 
+            expect.objectContaining({
+              name: `feature/1 - Last commit: ${date1.toLocaleDateString()} (no remote)`,
+              value: 'feature/1',
             }),
-            expect.objectContaining({ 
-              name: `feature/2 - Last commit: ${date2.toLocaleDateString()} (has remote: origin/feature/2)`, 
-              value: 'feature/2' 
+            expect.objectContaining({
+              name: `feature/2 - Last commit: ${date2.toLocaleDateString()} (has remote: origin/feature/2)`,
+              value: 'feature/2',
             }),
           ]),
         }),
@@ -62,10 +67,15 @@ describe('InquirerUI', () => {
     it('should return empty array when no branches selected', async () => {
       const date1 = new Date('2023-01-10T12:00:00');
       const date2 = new Date('2023-01-15T12:00:00');
-      
+
       const branches: Branch[] = [
         { name: 'feature/1', remote: null, lastCommit: 'abc123', lastCommitDate: date1 },
-        { name: 'feature/2', remote: 'origin/feature/2', lastCommit: 'def456', lastCommitDate: date2 },
+        {
+          name: 'feature/2',
+          remote: 'origin/feature/2',
+          lastCommit: 'def456',
+          lastCommitDate: date2,
+        },
       ];
 
       mockPrompt.mockResolvedValue({
@@ -75,15 +85,20 @@ describe('InquirerUI', () => {
       const result = await ui.selectBranches(branches);
       expect(result).toEqual([]);
     });
-    
+
     it('should display branch information correctly', async () => {
       // Create a mix of branches - with and without remotes
       const oldDate = new Date('2022-12-15T12:00:00');
       const recentDate = new Date('2023-01-15T12:00:00');
-      
+
       const branches: Branch[] = [
         { name: 'feature/old', remote: null, lastCommit: 'abc123', lastCommitDate: oldDate },
-        { name: 'feature/recent', remote: 'origin/feature/recent', lastCommit: 'def456', lastCommitDate: recentDate },
+        {
+          name: 'feature/recent',
+          remote: 'origin/feature/recent',
+          lastCommit: 'def456',
+          lastCommitDate: recentDate,
+        },
       ];
 
       mockPrompt.mockResolvedValue({
@@ -102,7 +117,7 @@ describe('InquirerUI', () => {
             },
             {
               name: `feature/recent - Last commit: ${recentDate.toLocaleDateString()} (has remote: origin/feature/recent)`,
-              value: 'feature/recent', 
+              value: 'feature/recent',
             },
           ],
         }),
