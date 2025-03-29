@@ -74,4 +74,4 @@ The tool will:
 
 ## License
 
-MIT
+[WTFPL](https://www.wtfpl.net/)

@@ -4,6 +4,7 @@
   "private": false,
   "type": "module",
   "description": "CLI tool to detect and remove stale Git branches",
+  "license": "WTFPL",
   "author": "Charles Swierczek <charles@forkflow.io>",
   "homepage": "https://github.com/karolsw3/git-branch-trimmer",
   "repository": {
