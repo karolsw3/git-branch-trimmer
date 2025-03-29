@@ -2,10 +2,11 @@ export interface Branch {
   name: string;
   remote: string | null;
   lastCommit: string;
+  lastCommitDate: Date;
 }
 
 export interface IBranchService {
-  getStaleBranches(): Promise<Branch[]>;
+  getStaleBranches(options?: { staleThreshold?: number }): Promise<Branch[]>;
   deleteBranches(branches: string[]): Promise<void>;
 }
 
@@ -17,4 +18,5 @@ export interface IUserInterface {
 export interface ICommandOptions {
   dryRun?: boolean;
   force?: boolean;
+  staleThreshold?: number;
 }

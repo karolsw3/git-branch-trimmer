@@ -25,7 +25,12 @@ class BranchTrimmer {
       }
 
       logger.info('🔍 Searching for stale branches...');
-      const staleBranches = await this.branchService.getStaleBranches();
+      
+      // Configure stale branch detection
+      const staleOptions = options.staleThreshold ? { staleThreshold: options.staleThreshold } : undefined;
+      
+      // Get stale branches
+      const staleBranches = await this.branchService.getStaleBranches(staleOptions);
 
       if (staleBranches.length === 0) {
         logger.success('✨ No stale branches found!');
@@ -67,7 +72,8 @@ async function main() {
     .description('CLI tool to detect and remove stale Git branches')
     .version('1.0.0')
     .option('-d, --dry-run', 'Show what would be deleted without actually deleting')
-    .option('-f, --force', 'Skip confirmation prompt');
+    .option('-f, --force', 'Skip confirmation prompt')
+    .option('-t, --stale-threshold <days>', 'Set the threshold in days for a branch to be considered stale (default: 30)', parseInt);
 
   program.parse();
 

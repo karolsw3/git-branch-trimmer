@@ -9,7 +9,9 @@ export class InquirerUI implements IUserInterface {
 
     logger.warn(`\nFound ${branches.length} stale branches:`);
     branches.forEach((branch, index) => {
-      logger.warn(`${index + 1}. ${branch.name}`);
+      const lastCommitDate = branch.lastCommitDate.toLocaleDateString();
+      const remoteStatus = branch.remote ? `(has remote: ${branch.remote})` : '(no remote)';
+      logger.warn(`${index + 1}. ${branch.name} - Last commit: ${lastCommitDate} ${remoteStatus}`);
     });
 
     const { selectedBranches } = await inquirer.prompt([
@@ -17,10 +19,14 @@ export class InquirerUI implements IUserInterface {
         type: 'checkbox',
         name: 'selectedBranches',
         message: 'Select branches to delete:',
-        choices: branches.map((branch) => ({
-          name: branch.name,
-          value: branch.name,
-        })),
+        choices: branches.map((branch) => {
+          const lastCommitDate = branch.lastCommitDate.toLocaleDateString();
+          const remoteStatus = branch.remote ? `(has remote: ${branch.remote})` : '(no remote)';
+          return {
+            name: `${branch.name} - Last commit: ${lastCommitDate} ${remoteStatus}`,
+            value: branch.name,
+          };
+        }),
       },
     ]);
 
