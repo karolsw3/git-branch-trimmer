@@ -1,6 +1,6 @@
 {
   "name": "git-branch-trimmer",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "private": false,
   "type": "module",
   "description": "CLI tool to detect and remove stale Git branches",
